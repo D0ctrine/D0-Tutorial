@@ -32,8 +32,8 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 	JPanel scoreP = new JPanel();
 	JPanel scoreP_down = new JPanel();
 	JButton startB = new JButton("Start");
+	int count=0;
 	
-	rule rl=null;
 	JButton[][] gameB = new JButton[5][5];
 	screen imsi= new screen();
 	boolean flag=true;
@@ -66,7 +66,7 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setVisible(true);
 	}
-	
+
 	public static void main(String[] args) {
 		
 		fmain f = new fmain();
@@ -81,19 +81,23 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 		//라벨에(label) 스타트버튼(startB) 넣고 그 라벨을 메인프레임에(mainP) 최종적으로 넣는다.
 		mainP.setLayout(new FlowLayout());
 		label.setLayout(new FlowLayout());
+		
 		label.add(startB);
 		mainP.add(label);
 				
 		//anipung패키지에 인덱스에 세팅하는  기능 가져오기
+		//(가끔씩 인덱스가 3개연속 비슷해도 안지우는 현상이있는데 왜 그런지 아직 못찾았어요
+		//시간부족해서 일단 넘어갔어요 ㅠㅠ
 		imsi.rand();
 		
-	 	flag = true;
+	 flag = true;
 
 	 	while(flag) {
+	 		imsi.fill(imsi.sc);
 	 		
-			imsi.fill(imsi.sc);
+	 		rule rl = new rule(imsi.sc);
+
 			
-			rl=new rule(imsi.sc);
 
 			flag = imsi.check(imsi.sc);
 
@@ -105,7 +109,7 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 	 	input_P.setLayout(new BorderLayout());
 	 	scoreP_down.setLayout(new GridLayout(5, 5)); //버튼형식을 지정(5X5)
 	 	
-	 //imsi.sc란 중복없이 입력된 최종 인덱스(모든인덱스에 숫자가 있다 / 그래야 게임이 시작됨) 
+	 	//imsi.sc란 중복없이 입력된 최종 인덱스(모든인덱스에 숫자가 있다 / 그래야 게임이 시작됨) 
 		for(int i=0;i<5;i++) {
 			for(int j=0;j<5;j++){
 				//최종적으로 gameB에 담는다.
@@ -126,30 +130,68 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 		startB.addActionListener(this);//초기화면에서 누르는 시작버튼
 		for(int i=0;i<5;i++) {
 			for(int j=0;j<5;j++){
+			
+				gameB[i][j].addActionListener(this); 
+			}
+			}
+		/*for(int i=0;i<5;i++) {
+			for(int j=0;j<5;j++){
 	   gameB[i][j].addItemListener(this);//눌러서 인덱스 번호를 받으려고하는데...
 			}
 		}
+		*/
 	}
 
+	public void convert_image(String[][] gameB) {
+		ImageIcon i1,i2,i3,i4,i5;
+		for(int i=0;i<5;i++) {
+			for(int j=0;j<5;j++) {
+				if(gameB[i][j]=="1") {
+					i1=new ImageIcon(this.getClass().getResource(""));
+				}else if(gameB[i][j]=="2") {
+						i1=new ImageIcon(this.getClass().getResource(""));
+			}else if(gameB[i][j]=="3") {
+				i1=new ImageIcon(this.getClass().getResource(""));
+			}else if(gameB[i][j]=="4") {
+				i1=new ImageIcon(this.getClass().getResource(""));
+			}else if(gameB[i][j]=="5") {
+				i1=new ImageIcon(this.getClass().getResource(""));
+			}
+		}
+		
+	}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(count==0) {
 		String read_b=e.getActionCommand();
 		if(read_b.equals("Start")) {
 		this.remove(mainP);	
 		this.add(input_P,"Center");
 		this.setVisible(true);
+		count++;
+		}
+		}
+		else if(count!=0) {
+			String read_b=e.getActionCommand();
+			for(int i=0;i<5;i++) {
+				for(int j=0;j<5;j++) {
+					
+					gameB[i][j].setText(String.valueOf(read_b));
+				}
+			}
 		}
 		
 	}
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		
-		
+		long red=e.MOUSE_EVENT_MASK;
+		System.out.println(red);
 		//누른 버튼의 인덱스 번호 받아오기
 	}
-	
 	
 	
 }
