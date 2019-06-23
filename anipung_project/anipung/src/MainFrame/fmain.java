@@ -41,13 +41,13 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 	
 	
 	fmain() {	
-		//»çÁøºÒ·¯¿À±â
+		//ì‚¬ì§„ë¶ˆëŸ¬ì˜¤ê¸°
 		File sourceimage = new File("C:\\Users\\hiseo\\Desktop\\anipung_project\\mainImg.jpg");
-		File image1 = new File("µ¿¹°»çÁø1");
-		File image2 = new File("µ¿¹°»çÁø2");
-		File image3 = new File("µ¿¹°»çÁø3");
-		File image4 = new File("µ¿¹°»çÁø4");
-		File image5 = new File("µ¿¹°»çÁø5");
+		File image1 = new File("ë™ë¬¼ì‚¬ì§„1");
+		File image2 = new File("ë™ë¬¼ì‚¬ì§„2");
+		File image3 = new File("ë™ë¬¼ì‚¬ì§„3");
+		File image4 = new File("ë™ë¬¼ì‚¬ì§„4");
+		File image5 = new File("ë™ë¬¼ì‚¬ì§„5");
 		
 		try {
 			img = ImageIO.read(sourceimage);
@@ -57,12 +57,12 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 			System.out.println("No Image Found.");
 		}
 		
-		//ÇÁ·Î±×·¥ È£Ãâ
+		//í”„ë¡œê·¸ë¨ í˜¸ì¶œ
 		init();
 		
-		//ÇÁ·Î±×·¥ Æ²Á¦ÀÛ
-		setTitle("¾Ö´ÏÆã");
-		pack(); 	//»çÁø¿¡ ¸Â°Ô »çÀÌÁî¸¦ ÀÚµ¿ ¸ÂÃã
+		//í”„ë¡œê·¸ë¨ í‹€ì œì‘
+		setTitle("ì• ë‹ˆí‘");
+		pack(); 	//ì‚¬ì§„ì— ë§ê²Œ ì‚¬ì´ì¦ˆë¥¼ ìë™ ë§ì¶¤
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setVisible(true);
 	}
@@ -74,65 +74,61 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 	}
 
 	void init(){
-		//ÀÌ¹ÌÁö¸¦ ¶óº§Ã³¸®ÇÏ±â
+		//ì´ë¯¸ì§€ë¥¼ ë¼ë²¨ì²˜ë¦¬í•˜ê¸°
 		JLabel label = new JLabel(new ImageIcon(img));
 	
 		
-		//¶óº§¿¡(label) ½ºÅ¸Æ®¹öÆ°(startB) ³Ö°í ±× ¶óº§À» ¸ŞÀÎÇÁ·¹ÀÓ¿¡(mainP) ÃÖÁ¾ÀûÀ¸·Î ³Ö´Â´Ù.
+		//ë¼ë²¨ì—(label) ìŠ¤íƒ€íŠ¸ë²„íŠ¼(startB) ë„£ê³  ê·¸ ë¼ë²¨ì„ ë©”ì¸í”„ë ˆì„ì—(mainP) ìµœì¢…ì ìœ¼ë¡œ ë„£ëŠ”ë‹¤.
 		mainP.setLayout(new FlowLayout());
 		label.setLayout(new FlowLayout());
 		label.add(startB);
 		mainP.add(label);
 				
-		//anipungÆĞÅ°Áö¿¡ ÀÎµ¦½º¿¡ ¼¼ÆÃÇÏ´Â  ±â´É °¡Á®¿À±â
-		//(°¡²û¾¿ ÀÎµ¦½º°¡ 3°³¿¬¼Ó ºñ½ÁÇØµµ ¾ÈÁö¿ì´Â Çö»óÀÌÀÖ´Âµ¥ ¿Ö ±×·±Áö ¾ÆÁ÷ ¸øÃ£¾Ò¾î¿ä
-		//½Ã°£ºÎÁ·ÇØ¼­ ÀÏ´Ü ³Ñ¾î°¬¾î¿ä ¤Ğ¤Ğ
+		//anipungíŒ¨í‚¤ì§€ì— ì¸ë±ìŠ¤ì— ì„¸íŒ…í•˜ëŠ”  ê¸°ëŠ¥ ê°€ì ¸ì˜¤ê¸°
 		imsi.rand();
 		
-	 flag = true;
+	 	flag = true;
 
 	 	while(flag) {
 	 		
-			rl=new rule(imsi.sc);
-
 			imsi.fill(imsi.sc);
+			
+			rl=new rule(imsi.sc);
 
 			flag = imsi.check(imsi.sc);
 
 		}
 
-	 	//ÃÊ±âÈ­¸éÇÁ·¹ÀÓ(mainP)¿¡¼­ ½ºÅ¸Æ®¹öÆ°(startB) ´©¸£¸é ³ªÅ¸³¯ ´ÙÀ½È­¸é(input_P)
+	 	//ì´ˆê¸°í™”ë©´í”„ë ˆì„(mainP)ì—ì„œ ìŠ¤íƒ€íŠ¸ë²„íŠ¼(startB) ëˆ„ë¥´ë©´ ë‚˜íƒ€ë‚  ë‹¤ìŒí™”ë©´(input_P)
 	 	input_P.setLayout(new FlowLayout());
 	 	
 	 	input_P.setLayout(new BorderLayout());
-	 	scoreP_down.setLayout(new GridLayout(5, 5)); //¹öÆ°Çü½ÄÀ» ÁöÁ¤(5X5)
+	 	scoreP_down.setLayout(new GridLayout(5, 5)); //ë²„íŠ¼í˜•ì‹ì„ ì§€ì •(5X5)
 	 	
-	 	//imsi.sc¶õ Áßº¹¾øÀÌ ÀÔ·ÂµÈ ÃÖÁ¾ ÀÎµ¦½º(¸ğµç°Í¿¡ ¼ıÀÚ°¡ ÀÖ´Ù / ±×·¡¾ß °ÔÀÓÀÌ ½ÃÀÛµÊ) 
+	 //imsi.scë€ ì¤‘ë³µì—†ì´ ì…ë ¥ëœ ìµœì¢… ì¸ë±ìŠ¤(ëª¨ë“ ì¸ë±ìŠ¤ì— ìˆ«ìê°€ ìˆë‹¤ / ê·¸ë˜ì•¼ ê²Œì„ì´ ì‹œì‘ë¨) 
 		for(int i=0;i<5;i++) {
 			for(int j=0;j<5;j++){
+				//ìµœì¢…ì ìœ¼ë¡œ gameBì— ë‹´ëŠ”ë‹¤.
+				scoreP_down.add(gameB[i][j]=new JButton(imsi.sc[i][j]));
 				
-				index_L.add(imsi.sc[i][j]);
-				//¿ø·¡ game[i][j]¿¡ ³Ö°í Á™´Âµ¥ ÇÁ·Î±×·¥»ó¿¡¼­ ¼±ÅÃÇÑ ¹öÆ°ÀÇ ÀÎµ¦½º ¹øÈ£¸¦ ¼ıÀÚ·Î °¡Á®¿À´Â ±â´ÉÀÌ
-				//ListÇÔ¼ö¿¡¸¸ ÀÖ´õ¶ó°í¿ä(Áö±İ±îÁö Ã£¾Æº»°á°ú...ÀÖÀ»¼öµµ...)
-		
-				scoreP_down.add(new JButton(index_L.getItem(i+j)));
-				
-				//scoreP_down.add(index_L); 
-				//add°ıÈ£ ¾È¿¡ index_L¸¸ ÀÖÀ¸¸é ¹öÆ°Àº ¾ÈµÇµµ ¼±ÅÃÇÑ ÀÎµ¦½º´Â ÀĞÇô¿Í¿ä 
 				
 				scoreP_down.setBackground(Color.GRAY);
 			}
 			System.out.println();
 		}
-		//ÀÌ°Íµµ ¸¸µé·Á°íÇÏ´Âµ¥ ÀÏ´Ü ¾Ö´ÏÆã ¸¸µç ÈÄ¿¡ »ı°¢ÇØ¿ä~±×³É ±ÛÀÚ¹öÆ°¸¸ ¸¸µé¾î³ù¾î¿ä
-		JButton scoreB = new JButton("Á¡¼öÆÇ");
+		//ì´ê²ƒë„ ë§Œë“¤ë ¤ê³ í•˜ëŠ”ë° ì¼ë‹¨ ì• ë‹ˆí‘ ë§Œë“  í›„ì— ìƒê°í•´ìš”~ê·¸ëƒ¥ ê¸€ìë²„íŠ¼ë§Œ ë§Œë“¤ì–´ë†¨ì–´ìš”
+		JButton scoreB = new JButton("ì ìˆ˜íŒ");
 		scoreP.add(scoreB);
 		input_P.add(scoreP,"North");
 		input_P.add(scoreP_down,"Center");
 		
 		add(mainP);
-		startB.addActionListener(this);//ÃÊ±âÈ­¸é¿¡¼­ ´©¸£´Â ½ÃÀÛ¹öÆ°
-	   index_L.addItemListener(this);//´­·¯¼­ ÀÎµ¦½º ¹øÈ£¸¦ ¹ŞÀ¸·Á°íÇÏ´Âµ¥...
+		startB.addActionListener(this);//ì´ˆê¸°í™”ë©´ì—ì„œ ëˆ„ë¥´ëŠ” ì‹œì‘ë²„íŠ¼
+		for(int i=0;i<5;i++) {
+			for(int j=0;j<5;j++){
+	   gameB[i][j].addItemListener(this);//ëˆŒëŸ¬ì„œ ì¸ë±ìŠ¤ ë²ˆí˜¸ë¥¼ ë°›ìœ¼ë ¤ê³ í•˜ëŠ”ë°...
+			}
+		}
 	}
 
 	@Override
@@ -148,15 +144,12 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 	}
 
 	@Override
-	public void itemStateChanged(ItemEvent arg0) {
-		// TODO Auto-generated method stub
-		int selNum = index_L.getSelectedIndex();//¿ä°Ô ¾ÈµÇ¿ä...
-		//ÀÌ°Å´Â ¸®½ºÆ®¿¡¼­ ¹Ş¾Æ¿À´Â°Ô °¡´ÉÇÏ´Ù¸é ´Ù½Ã ÀÌÂ÷¿ø Çà·Ä·Î ¸¸µé¾î¾ß Á¦°¡ ¸¸µç anipung ¸Ş¼­µå°¡ ½ÇÇàµÇ¼­..
-		int i=selNum/5;//Çà
-		int j=selNum%5;//¿­
+	public void itemStateChanged(ItemEvent e) {
 		
-		System.out.print("a["+i+"]"+"["+j+"]"); //¼ıÀÚ°¡ ³ª¿À³ª Å×½ºÆ®
+		
+		//ëˆ„ë¥¸ ë²„íŠ¼ì˜ ì¸ë±ìŠ¤ ë²ˆí˜¸ ë°›ì•„ì˜¤ê¸°
 	}
+	
 	
 	
 }
