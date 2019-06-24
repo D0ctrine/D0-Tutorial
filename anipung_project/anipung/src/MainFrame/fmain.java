@@ -12,14 +12,17 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import anipung.falling;
 import anipung.rule;
 import anipung.screen;
 
@@ -33,21 +36,24 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 	JPanel scoreP_down = new JPanel();
 	JButton startB = new JButton("Start");
 	int count=0;
-	
+
+
 	JButton[][] gameB = new JButton[5][5];
+	JButton[][] imsigameB = new JButton[5][5];
 	screen imsi= new screen();
 	boolean flag=true;
 	List index_L = new List();
 	
+	File sourceimage = new File("C:\\Users\\HU-203-11\\Desktop\\¾Ö´ÏÆãPROJECT\\¾Ö´ÏÆã.jpg");
+	ImageIcon image1 = new ImageIcon("C:\\Users\\HU-203-11\\Desktop\\¾Ö´ÏÆãPROJECT\\¾ó±¼1.jpg");
+	ImageIcon image2 = new ImageIcon("C:\\Users\\HU-203-11\\Desktop\\¾Ö´ÏÆãPROJECT\\¾ó±¼2.jpg");
+	ImageIcon image3 = new ImageIcon("C:\\Users\\HU-203-11\\Desktop\\¾Ö´ÏÆãPROJECT\\¾ó±¼3.jpg");
+	ImageIcon image4 = new ImageIcon("C:\\Users\\HU-203-11\\Desktop\\¾Ö´ÏÆãPROJECT\\¾ó±¼4.jpg");
+	ImageIcon image5 = new ImageIcon("C:\\Users\\HU-203-11\\Desktop\\¾Ö´ÏÆãPROJECT\\¾ó±¼5.jpg");
+	ImageIcon image6 = new ImageIcon("C:\\Users\\HU-203-11\\Desktop\\¾Ö´ÏÆãPROJECT\\¾ó±¼6.jpg");
 	
 	fmain() {	
-		//ì‚¬ì§„ë¶ˆëŸ¬ì˜¤ê¸°
-		File sourceimage = new File("C:\\Users\\hiseo\\Desktop\\anipung_project\\mainImg.jpg");
-		File image1 = new File("ë™ë¬¼ì‚¬ì§„1");
-		File image2 = new File("ë™ë¬¼ì‚¬ì§„2");
-		File image3 = new File("ë™ë¬¼ì‚¬ì§„3");
-		File image4 = new File("ë™ë¬¼ì‚¬ì§„4");
-		File image5 = new File("ë™ë¬¼ì‚¬ì§„5");
+		//»çÁøºÒ·¯¿À±â
 		
 		try {
 			img = ImageIO.read(sourceimage);
@@ -57,89 +63,100 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 			System.out.println("No Image Found.");
 		}
 		
-		//í”„ë¡œê·¸ë¨ í˜¸ì¶œ
+		//ÇÁ·Î±×·¥ È£Ãâ
 		init();
 		
-		//í”„ë¡œê·¸ë¨ í‹€ì œì‘
-		setTitle("ì• ë‹ˆí‘");
-		pack(); 	//ì‚¬ì§„ì— ë§ê²Œ ì‚¬ì´ì¦ˆë¥¼ ìë™ ë§ì¶¤
+		//ÇÁ·Î±×·¥ Æ²Á¦ÀÛ
+		setTitle("¾Ö´ÏÆã");
+		pack(); 	//»çÁø¿¡ ¸Â°Ô »çÀÌÁî¸¦ ÀÚµ¿ ¸ÂÃã
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setVisible(true);
 	}
 
 	public static void main(String[] args) {
 		
-		fmain f = new fmain();
+	fmain f = new fmain();
 	
 	}
-
+	
 	void init(){
-		//ì´ë¯¸ì§€ë¥¼ ë¼ë²¨ì²˜ë¦¬í•˜ê¸°
+		//ÀÌ¹ÌÁö¸¦ ¶óº§Ã³¸®ÇÏ±â
 		JLabel label = new JLabel(new ImageIcon(img));
 	
 		
-		//ë¼ë²¨ì—(label) ìŠ¤íƒ€íŠ¸ë²„íŠ¼(startB) ë„£ê³  ê·¸ ë¼ë²¨ì„ ë©”ì¸í”„ë ˆì„ì—(mainP) ìµœì¢…ì ìœ¼ë¡œ ë„£ëŠ”ë‹¤.
+		//¶óº§¿¡(label) ½ºÅ¸Æ®¹öÆ°(startB) ³Ö°í ±× ¶óº§À» ¸ŞÀÎÇÁ·¹ÀÓ¿¡(mainP) ÃÖÁ¾ÀûÀ¸·Î ³Ö´Â´Ù.
 		mainP.setLayout(new FlowLayout());
 		label.setLayout(new FlowLayout());
 		
 		label.add(startB);
 		mainP.add(label);
 				
-		//anipungíŒ¨í‚¤ì§€ì— ì¸ë±ìŠ¤ì— ì„¸íŒ…í•˜ëŠ”  ê¸°ëŠ¥ ê°€ì ¸ì˜¤ê¸°
-		//(ê°€ë”ì”© ì¸ë±ìŠ¤ê°€ 3ê°œì—°ì† ë¹„ìŠ·í•´ë„ ì•ˆì§€ìš°ëŠ” í˜„ìƒì´ìˆëŠ”ë° ì™œ ê·¸ëŸ°ì§€ ì•„ì§ ëª»ì°¾ì•˜ì–´ìš”
-		//ì‹œê°„ë¶€ì¡±í•´ì„œ ì¼ë‹¨ ë„˜ì–´ê°”ì–´ìš” ã… ã… 
+		//anipungÆĞÅ°Áö¿¡ ÀÎµ¦½º¿¡ ¼¼ÆÃÇÏ´Â  ±â´É °¡Á®¿À±â
+		//(°¡²û¾¿ ÀÎµ¦½º°¡ 3°³¿¬¼Ó ºñ½ÁÇØµµ ¾ÈÁö¿ì´Â Çö»óÀÌÀÖ´Âµ¥ ¿Ö ±×·±Áö ¾ÆÁ÷ ¸øÃ£¾Ò¾î¿ä
+		//½Ã°£ºÎÁ·ÇØ¼­ ÀÏ´Ü ³Ñ¾î°¬¾î¿ä ¤Ğ¤Ğ
 		imsi.rand();
 		
 	 flag = true;
 
 	 	while(flag) {
+	 		
 	 		imsi.fill(imsi.sc);
 	 		
 	 		rule rl = new rule(imsi.sc);
+	 		
+	 		imsi.fill(imsi.sc);
+	 		
+	 		flag = imsi.check(imsi.sc);
 
-			
-
-			flag = imsi.check(imsi.sc);
 
 		}
 
-	 	//ì´ˆê¸°í™”ë©´í”„ë ˆì„(mainP)ì—ì„œ ìŠ¤íƒ€íŠ¸ë²„íŠ¼(startB) ëˆ„ë¥´ë©´ ë‚˜íƒ€ë‚  ë‹¤ìŒí™”ë©´(input_P)
+	 	//ÃÊ±âÈ­¸éÇÁ·¹ÀÓ(mainP)¿¡¼­ ½ºÅ¸Æ®¹öÆ°(startB) ´©¸£¸é ³ªÅ¸³¯ ´ÙÀ½È­¸é(input_P)
 	 	input_P.setLayout(new FlowLayout());
 	 	
 	 	input_P.setLayout(new BorderLayout());
-	 	scoreP_down.setLayout(new GridLayout(5, 5)); //ë²„íŠ¼í˜•ì‹ì„ ì§€ì •(5X5)
+	 	scoreP_down.setLayout(new GridLayout(5, 5)); //¹öÆ°Çü½ÄÀ» ÁöÁ¤(5X5)
 	 	
-	 	//imsi.scë€ ì¤‘ë³µì—†ì´ ì…ë ¥ëœ ìµœì¢… ì¸ë±ìŠ¤(ëª¨ë“ ì¸ë±ìŠ¤ì— ìˆ«ìê°€ ìˆë‹¤ / ê·¸ë˜ì•¼ ê²Œì„ì´ ì‹œì‘ë¨) 
+	 	//imsi.sc¶õ Áßº¹¾øÀÌ ÀÔ·ÂµÈ ÃÖÁ¾ ÀÎµ¦½º(¸ğµçÀÎµ¦½º¿¡ ¼ıÀÚ°¡ ÀÖ´Ù / ±×·¡¾ß °ÔÀÓÀÌ ½ÃÀÛµÊ) 
 		for(int i=0;i<5;i++) {
 			for(int j=0;j<5;j++){
-				//ìµœì¢…ì ìœ¼ë¡œ gameBì— ë‹´ëŠ”ë‹¤.
-				scoreP_down.add(gameB[i][j]=new JButton(imsi.sc[i][j]));
-				
+				//ÃÖÁ¾ÀûÀ¸·Î gameB¿¡ ´ã´Â´Ù.
+				gameB[i][j]=new JButton(imsi.sc[i][j]);
+				if(gameB[i][j].getText().equals("1")) {
+					
+					gameB[i][j].setIcon(image1);;
+					
+				}else if(gameB[i][j].getText().equals("2")) {
+					gameB[i][j].setIcon(image2);;
+				}else if(gameB[i][j].getText().equals("3")) {
+					gameB[i][j].setIcon(image3);;
+				}else if(gameB[i][j].getText().equals("4")) {
+						gameB[i][j].setIcon(image4);
+				}else if(gameB[i][j].getText().equals("5")) {
+					gameB[i][j].setIcon(image5);
+				}
+				scoreP_down.add(gameB[i][j]);
 				
 				scoreP_down.setBackground(Color.GRAY);
 			}
-			System.out.println();
 		}
-		//ì´ê²ƒë„ ë§Œë“¤ë ¤ê³ í•˜ëŠ”ë° ì¼ë‹¨ ì• ë‹ˆí‘ ë§Œë“  í›„ì— ìƒê°í•´ìš”~ê·¸ëƒ¥ ê¸€ìë²„íŠ¼ë§Œ ë§Œë“¤ì–´ë†¨ì–´ìš”
-		JButton scoreB = new JButton("ì ìˆ˜íŒ");
-		scoreP.add(scoreB);
-		input_P.add(scoreP,"North");
+		//ÀÌ°Íµµ ¸¸µé·Á°íÇÏ´Âµ¥ ÀÏ´Ü ¾Ö´ÏÆã ¸¸µç ÈÄ¿¡ »ı°¢ÇØ¿ä~±×³É ±ÛÀÚ¹öÆ°¸¸ ¸¸µé¾î³ù¾î¿ä
+	//	JButton scoreB = new JButton("Á¡¼öÆÇ");
+	//	scoreP.add(scoreB);
+	//	input_P.add(scoreP,"North");
 		input_P.add(scoreP_down,"Center");
 		
 		add(mainP);
-		startB.addActionListener(this);//ì´ˆê¸°í™”ë©´ì—ì„œ ëˆ„ë¥´ëŠ” ì‹œì‘ë²„íŠ¼
+		startB.addActionListener(this);//ÃÊ±âÈ­¸é¿¡¼­ ´©¸£´Â ½ÃÀÛ¹öÆ°
 		for(int i=0;i<5;i++) {
 			for(int j=0;j<5;j++){
 			
 				gameB[i][j].addActionListener(this); 
 			}
 			}
-		/*for(int i=0;i<5;i++) {
-			for(int j=0;j<5;j++){
-	   gameB[i][j].addItemListener(this);//ëˆŒëŸ¬ì„œ ì¸ë±ìŠ¤ ë²ˆí˜¸ë¥¼ ë°›ìœ¼ë ¤ê³ í•˜ëŠ”ë°...
-			}
-		}
-		*/
+		
+		
+		
 	}
 
 	public void convert_image(String[][] gameB) {
@@ -161,36 +178,114 @@ public class fmain extends JFrame implements ActionListener,ItemListener {
 		
 	}
 	}
+	 private void findButton(Object c,String read_b) {
 	
+	        for (int x = 0; x < 5; x++) {
+	            for (int y = 0; y < 5; y++) {
+	                if (c.equals(gameB[x][y])) {
+	                	gameB[x][y].setText(read_b);
+	                	
+	                	
+	                }
+	                
+	            }
+	        }
+	    }
+
+	 Object o1 = null;
+	 String	read_b1 = null;
+	 String	read_b2 = null;
+	 Object o2 =null;
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		falling fall=new falling(gameB);
+		 imsi.fill(gameB); 
+	
 		if(count==0) {
-		String read_b=e.getActionCommand();
-		if(read_b.equals("Start")) {
+		read_b1=e.getActionCommand();
+		if(read_b1.equals("Start")) {
 		this.remove(mainP);	
 		this.add(input_P,"Center");
 		this.setVisible(true);
 		count++;
 		}
 		}
-		else if(count!=0) {
-			String read_b=e.getActionCommand();
+		else if(count==1) {
+			read_b1=e.getActionCommand();
+			o1=e.getSource();
+			
+			count++;
+		}else {
+			read_b2=e.getActionCommand();
+			o2 = e.getSource();
+			findButton(o1,read_b2);
+			findButton(o2,read_b1);
+			
 			for(int i=0;i<5;i++) {
 				for(int j=0;j<5;j++) {
+					if(gameB[i][j].getText().equals("1")) {
 					
-					gameB[i][j].setText(String.valueOf(read_b));
+						gameB[i][j].setIcon(image1);
+						
+					}else if(gameB[i][j].getText().equals("2")) {
+						gameB[i][j].setIcon(image2);
+					}else if(gameB[i][j].getText().equals("3")) {
+						gameB[i][j].setIcon(image3);
+					}else if(gameB[i][j].getText().equals("4")) {
+							gameB[i][j].setIcon(image4);
+					}else if(gameB[i][j].getText().equals("5")) {
+						
+						gameB[i][j].setIcon(image5);
+						
+					}
+				}
+			}
+			/*
+			this.remove(input_P);
+			input_P.add(scoreP_down);
+			this.add(input_P,"Center");
+			this.setVisible(true);
+			this.add(scoreP_down,"Center");
+			setVisible(true);
+			*/
+			count--;
+		
+			}//end else if
+		
+		rule rl = new rule(gameB);
+
+		flag = imsi.check(gameB);
+		
+		
+	
+ 		
+ 		for(int i=0;i<5;i++) {
+			for(int j=0;j<5;j++) {
+				if(gameB[i][j].getText().equals("1")) {
+					gameB[i][j].setIcon(image1);
+				}else if(gameB[i][j].getText().equals("2")) {
+					gameB[i][j].setIcon(image2);
+				}else if(gameB[i][j].getText().equals("3")) {
+					gameB[i][j].setIcon(image3);
+				}else if(gameB[i][j].getText().equals("4")) {
+						gameB[i][j].setIcon(image4);
+				}else if(gameB[i][j].getText().equals("5")) {
+					gameB[i][j].setIcon(image5);
+				}else if(gameB[i][j].getText().equals("0")) {
+					gameB[i][j].setIcon(image6);
 				}
 			}
 		}
+ 		 
+		}
 		
-	}
+	
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		long red=e.MOUSE_EVENT_MASK;
-		System.out.println(red);
-		//ëˆ„ë¥¸ ë²„íŠ¼ì˜ ì¸ë±ìŠ¤ ë²ˆí˜¸ ë°›ì•„ì˜¤ê¸°
+		
+		//´©¸¥ ¹öÆ°ÀÇ ÀÎµ¦½º ¹øÈ£ ¹Ş¾Æ¿À±â
 	}
 	
 	

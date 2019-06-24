@@ -1,12 +1,9 @@
 package anipung;
 
 public class Main {
-
-	Main(){
-		
-		screen sc= new screen();
-		
-	}
-		
+//public static void main(String[] args) {
 	
+//	screen ani= new screen();
+	
+//}
 }
