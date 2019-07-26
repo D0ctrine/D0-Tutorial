@@ -2,6 +2,7 @@ package UI;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
@@ -15,13 +16,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
-public class SecondBit extends JFrame{
+public class SecondBit extends JFrame implements ActionListener{
 	private JPanel contentPane1;
 	
 	ThirdBit tb = new ThirdBit();
 	
 	public SecondBit() {
-		
+		setResizable(false);
+		this.setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 568, 425);
 		contentPane1 = new JPanel();
@@ -70,34 +72,48 @@ public class SecondBit extends JFrame{
 		JMenuItem menuItem = new JMenuItem("[ 1. 계좌 조회 ]");
 		menuItem.setBounds(43, 31, 174, 22);
 		panel_1.add(menuItem);
-		menuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				contentPane1.setVisible(false);
-				tb.ThirdBit_1();
-			}
-		});
+		menuItem.addActionListener(this);
+		
 		JMenuItem menuItem_1 = new JMenuItem("[ 2. 계좌 출금 ]");
 		menuItem_1.setBounds(43, 90, 174, 22);
 		panel_1.add(menuItem_1);
-		menuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				contentPane1.setVisible(false);
-				tb.ThirdBit_2();
-			}
-		});
+		menuItem_1.addActionListener(this);
 		
 		JMenuItem menuItem_2 = new JMenuItem("[ 3. 계좌 입금/송금 ]");
 		menuItem_2.setBounds(43, 145, 174, 22);
 		panel_1.add(menuItem_2);
-		menuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				contentPane1.setVisible(false);
-				tb.ThirdBit_3();
-			}
-		});
+		menuItem_2.addActionListener(this);
 		
+		JMenuItem menuItem3 = new JMenuItem("로그아웃");
+		menuItem3.setBackground(new Color(255, 153, 0));
+		menuItem3.setBounds(0, 365, 103, 22);
+		contentPane1.add(menuItem3);
+		menuItem3.addActionListener(this);
+			
 	
 	}
 	
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals("[ 1. 계좌 조회 ]")) {
+			this.setVisible(false);
+			contentPane1.setVisible(false);
+			tb.ThirdBit_1();
+		}else if(e.getActionCommand().equals("[ 2. 계좌 출금 ]")) {
+			this.setVisible(false);
+			contentPane1.setVisible(false);
+			tb.ThirdBit_2();
+		}else if(e.getActionCommand().equals("[ 3. 계좌 입금/송금 ]")) {
+			this.setVisible(false);
+			contentPane1.setVisible(false);
+			tb.ThirdBit_3();
+		}else if(e.getActionCommand().equals("로그아웃")) {
+			this.setVisible(false);
+			contentPane1.setVisible(false);
+			FirstBit frame = new FirstBit();
+		}
+
+	}
+
 	
 }
